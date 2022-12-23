@@ -1,0 +1,673 @@
+﻿@using System.Globalization;
+@model etax_generate_pdf.Models.DJP;
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<style type="text/css">
+		html * {
+			font-size: 11pt !important;
+			color: #000 !important;
+			font-family: 'Times New Roman' !important;
+		}
+	</style>
+</head>
+
+<body>
+	<table cellspacing="0" border="0">
+		<colgroup width="40"></colgroup>
+		<colgroup width="200"></colgroup>
+		<colgroup width="40"></colgroup>
+		<colgroup width="150"></colgroup>
+		<colgroup width="100"></colgroup>
+		<colgroup width="110"></colgroup>
+		<colgroup span="2" width="100"></colgroup>
+		<colgroup width="150"></colgroup>
+		<tr>
+			<td style="border-top: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000"
+				colspan=9 height="19" align="center" valign=bottom>
+				<br>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-left: 2px solid #000000; border-right: 2px solid #000000" colspan=9 height="18"
+				align="center" valign=bottom>
+				<b>
+					Nota Retur
+				</b>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-left: 2px solid #000000; border-right: 2px solid #000000" colspan=9 height="19"
+				align="right" valign=bottom>
+				Nomor: @Model.ReturNumber
+			</td>
+		</tr>
+		<tr>
+			<td style="border-bottom: 2px solid #000000; border-left: 2px solid #000000" colspan=2 height="20"
+				align="right" valign=bottom>
+				( Atas Faktur Pajak Nomor
+			</td>
+			<td style="border-bottom: 2px solid #000000" align="center" valign=bottom>
+				:
+			</td>
+			<td style="border-bottom: 2px solid #000000" align="left" valign=bottom>
+				@Model.FormatedNomorFaktur
+			</td>
+			<td style="border-bottom: 2px solid #000000" align="left" valign=bottom>
+				<br>
+			</td>
+			<td style="border-bottom: 2px solid #000000" align="left" valign=bottom>
+				@Model.TanggalFaktur?.Replace("/",".")
+			</td>
+			<td style="border-bottom: 2px solid #000000" align="left" valign=bottom>
+				<br>
+			</td>
+			<td style="border-bottom: 2px solid #000000" align="left" valign=bottom>
+				<br>
+			</td>
+			<td style="border-bottom: 2px solid #000000; border-right: 2px solid #000000" align="left" valign=bottom>
+				<br>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-top: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000"
+				colspan=9 height="18" align="left" valign=bottom>
+				<b>
+					Pembeli
+				</b>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-left: 2px solid #000000" colspan=2 height="18" align="left" valign=bottom>
+				Nama
+			</td>
+			<td align="center" valign=bottom>
+				:
+			</td>
+			<td style="border-right: 2px solid #000000" colspan=6 align="left" valign=bottom>
+				<b>
+					@Model.NamaPenjual
+				</b>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-left: 2px solid #000000" colspan=2 rowspan=3 height="55" align="left" valign=top>
+				Alamat
+			</td>
+			<td rowspan=3 align="center" valign=top>
+				:
+			</td>
+			<td style="border-right: 2px solid #000000" colspan=6 rowspan=3 align="left" valign=top>
+				<b>
+					@Model.AlamatPenjual
+				</b>
+			</td>
+		</tr>
+		<tr>
+		</tr>
+		<tr>
+		</tr>
+		<tr>
+			<td style="border-left: 2px solid #000000" colspan=2 height="18" align="left" valign=bottom>
+				NPWP
+			</td>
+			<td align="center" valign=bottom>
+				:
+			</td>
+			<td style="border-right: 2px solid #000000" colspan=6 align="left" valign=bottom>
+				<b>
+					@Model.FormatedNpwpPenjual
+				</b>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-left: 2px solid #000000; border-right: 2px solid #000000" colspan=9 height="18"
+				align="left" valign=bottom>
+				<b>
+					Kepada Penjual
+				</b>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-left: 2px solid #000000" colspan=2 height="18" align="left" valign=bottom>
+				Nama
+			</td>
+			<td align="center" valign=bottom>
+				:
+			</td>
+			<td style="border-right: 2px solid #000000" colspan=6 align="left" valign=bottom>
+				<b>
+					PT. ISUZU ASTRA MOTOR INDONESIA
+				</b>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-left: 2px solid #000000" colspan=2 rowspan=3 height="55" align="left" valign=top>
+				Alamat
+			</td>
+			<td rowspan=3 align="center" valign=top>
+				:
+			</td>
+			<td style="border-right: 2px solid #000000" colspan=6 rowspan=3 align="left" valign=top>
+				<b>
+					Jl. Danau Sunter Utara Blok 0-3 Kav.30 Kel. Sunter Jaya
+					Kec. Danau Sunter Utara Blok 0-3 Kav.30 Kel. Sunter Jaya Kec. Tanjung Priok - Jakarta Utara
+
+				</b>
+			</td>
+		</tr>
+		<tr>
+		</tr>
+		<tr>
+		</tr>
+		<tr>
+			<td style="border-left: 2px solid #000000" colspan=2 height="18" align="left" valign=bottom>
+				NPWP
+			</td>
+			<td align="center" valign=bottom>
+				:
+			</td>
+			<td style="border-right: 2px solid #000000" colspan=6 align="left" valign=bottom>
+				<b>
+					01.000.514.8-092.000
+				</b>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-left: 2px solid #000000" colspan=2 height="18" align="left" valign=bottom>
+				NPPKP
+			</td>
+			<td align="center" valign=bottom>
+				:
+			</td>
+			<td style="border-right: 2px solid #000000" colspan=6 align="left" valign=bottom>
+				<b>
+					01.000.514.8-092.000
+				</b>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 2px solid #000000; border-right: 1px solid #000000"
+				height="42" align="center" valign=middle>
+				No. Urut
+			</td>
+			<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+				colspan=3 align="center" valign=middle>
+				Macam &amp; Jenis Barang Kena pajak
+			</td>
+			<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+				align="center" valign=middle>
+				Kuantum
+			</td>
+			<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+				colspan=2 align="center" valign=middle>
+				Harga Satuan (Rp)
+			</td>
+			<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 2px solid #000000"
+				colspan=2 align="center" valign=middle>
+				Harga BPK yang<br>Dikembalikan (Rp)
+			</td>
+		</tr>
+		@{ int totalDetailTransaksi = 0;}
+		@if (Model.DetailTransaksi != null)
+		{
+			totalDetailTransaksi = Model.DetailTransaksi.Count;
+			@for (var i = 0; i < totalDetailTransaksi; i++)
+			{
+				var sequenceNumber = i + 1;
+				
+				<tr>
+					<td style="border-left: 2px solid #000000; border-right: 1px solid #000000" height="18" align="center"
+				valign=bottom sdval="1">
+						@sequenceNumber
+					</td>
+					<td style="border-left: 1px solid #000000; border-right: 1px solid #000000" colspan=3 align="left"
+				valign=bottom>
+						@Model.DetailTransaksi[i].Nama
+					</td>
+					<td style="border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=bottom
+				sdval="1">
+						@Model.DetailTransaksi[i].JumlahBarang
+					</td>
+					<td style="border-left: 1px solid #000000; border-right: 1px solid #000000" colspan=2 align="center"
+				valign=bottom>
+						@Model.DetailTransaksi[i].HargaSatuan.ToString("n0", CultureInfo.CreateSpecificCulture("en-ID"))
+					</td>
+					<td style="border-left: 1px solid #000000; border-right: 2px solid #000000" colspan=2 align="center"
+				valign=bottom>
+						@Model.DetailTransaksi[i].HargaTotal.ToString("n0", CultureInfo.CreateSpecificCulture("en-ID"))
+					</td>
+				</tr>
+			}
+		}
+		
+		@if (totalDetailTransaksi < 25)
+		{
+			@for (var i = 0; i < 25 - totalDetailTransaksi; i++)
+			{
+				<tr>
+					<td style="border-left: 2px solid #000000; border-right: 1px solid #000000" height="18" align="left"
+				valign=bottom>
+						<br>
+					</td>
+					<td style="border-left: 1px solid #000000; border-right: 1px solid #000000" colspan=3 align="left"
+				valign=bottom>
+						<br>
+					</td>
+					<td style="border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=bottom>
+						<br>
+					</td>
+					<td style="border-left: 1px solid #000000; border-right: 1px solid #000000" colspan=2 align="center"
+				valign=bottom>
+						<br>
+					</td>
+					<td style="border-left: 1px solid #000000; border-right: 2px solid #000000" colspan=2 align="center"
+				valign=bottom>
+						<br>
+					</td>
+				</tr>
+			}
+		}
+		<tr>
+			<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 2px solid #000000; border-right: 1px solid #000000"
+				colspan=7 rowspan=2 height="37" align="left" valign=middle>
+				Jumlah Harga BKP yang dikembalikan
+			</td>
+			<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 2px solid #000000"
+				colspan=2 rowspan=2 align="right" valign=bottom sdval="5608999">
+				@Model.JumlahDpp.ToString("n0", CultureInfo.CreateSpecificCulture("en-ID"))
+			</td>
+		</tr>
+		<tr>
+		</tr>
+		<tr>
+			<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 2px solid #000000; border-right: 1px solid #000000"
+				colspan=7 height="18" align="left" valign=bottom>
+				Pajak Pertambahan Nilai Yang Diminta Kembali
+			</td>
+			<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 2px solid #000000"
+				colspan=2 align="right" valign=bottom>
+				@Model.JumlahPpn.ToString("n0", CultureInfo.CreateSpecificCulture("en-ID"))
+			</td>
+		</tr>
+		<tr>
+			<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 2px solid #000000; border-right: 1px solid #000000"
+				colspan=7 height="18" align="left" valign=bottom>
+				Pajak Penjualan Barang Mewah Yang Diminta Kembali
+			</td>
+			<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 2px solid #000000"
+				colspan=2 align="right" valign=bottom>
+				@Model.JumlahPpnBm.ToString("n0", CultureInfo.CreateSpecificCulture("en-ID"))
+			</td>
+		</tr>
+		<tr>
+			<td style="border-top: 1px solid #000000; border-left: 2px solid #000000" height="18" align="left"
+				valign=bottom>
+				<br>
+			</td>
+			<td style="border-top: 1px solid #000000" align="left" valign=bottom>
+				<br>
+			</td>
+			<td style="border-top: 1px solid #000000" align="left" valign=bottom>
+				<br>
+			</td>
+			<td style="border-top: 1px solid #000000" align="left" valign=bottom>
+				<br>
+			</td>
+			<td style="border-top: 1px solid #000000" align="left" valign=bottom>
+				<br>
+			</td>
+			<td style="border-top: 1px solid #000000" align="left" valign=bottom>
+				<br>
+			</td>
+			<td style="border-top: 1px solid #000000" align="left" valign=bottom>
+				<br>
+			</td>
+			<td style="border-top: 1px solid #000000" align="left" valign=bottom>
+				<br>
+			</td>
+			<td style="border-top: 1px solid #000000; border-right: 2px solid #000000" align="left" valign=bottom>
+				<br>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-left: 2px solid #000000" height="18" align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td style="border-right: 2px solid #000000" colspan=3 align="center" valign=bottom>
+				Jakarta, @Model.ReturDate?.ToString("dd.MM.yyyy", CultureInfo.InvariantCulture)
+			</td>
+		</tr>
+		<tr>
+			<td style="border-left: 2px solid #000000" height="18" align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td style="border-right: 2px solid #000000" colspan=2 align="center" valign=bottom>
+				Pembeli
+			</td>
+		</tr>
+		<tr>
+			<td style="border-left: 2px solid #000000" height="18" align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td style="border-right: 2px solid #000000" align="left" valign=bottom>
+				<br>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-left: 2px solid #000000" height="18" align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td style="border-right: 2px solid #000000" align="left" valign=bottom>
+				<br>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-left: 2px solid #000000" height="18" align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td style="border-right: 2px solid #000000" align="left" valign=bottom>
+				<br>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-left: 2px solid #000000" height="18" align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td style="border-right: 2px solid #000000" align="left" valign=bottom>
+				<br>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-left: 2px solid #000000" height="18" align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td style="border-right: 2px solid #000000" align="left" valign=bottom>
+				<br>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-left: 2px solid #000000" height="18" align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td style="border-right: 2px solid #000000" colspan=3 align="center" valign=bottom>
+				(&hellip;............................)
+			</td>
+		</tr>
+		<tr>
+			<td style="border-left: 2px solid #000000" height="18" align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td align="left" valign=bottom>
+				<br>
+			</td>
+			<td style="border-right: 2px solid #000000" align="left" valign=bottom>
+				<br>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-bottom: 1px solid #000000; border-left: 2px solid #000000" height="18" align="left"
+				valign=bottom>
+				<br>
+			</td>
+			<td style="border-bottom: 1px solid #000000" align="left" valign=bottom>
+				<br>
+			</td>
+			<td style="border-bottom: 1px solid #000000" align="left" valign=bottom>
+				<br>
+			</td>
+			<td style="border-bottom: 1px solid #000000" align="left" valign=bottom>
+				<br>
+			</td>
+			<td style="border-bottom: 1px solid #000000" align="left" valign=bottom>
+				<br>
+			</td>
+			<td style="border-bottom: 1px solid #000000" align="left" valign=bottom>
+				<br>
+			</td>
+			<td style="border-bottom: 1px solid #000000" align="left" valign=bottom>
+				<br>
+			</td>
+			<td style="border-bottom: 1px solid #000000" align="left" valign=bottom>
+				<br>
+			</td>
+			<td style="border-bottom: 1px solid #000000; border-right: 2px solid #000000" align="left" valign=bottom>
+				<br>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-top: 1px solid #000000; border-left: 2px solid #000000" colspan=2 height="18" align="left"
+				valign=bottom>
+				Lembar Ke 1
+			</td>
+			<td style="border-top: 1px solid #000000" align="center" valign=bottom>
+				:
+			</td>
+			<td style="border-top: 1px solid #000000; border-right: 2px solid #000000" colspan=6 align="left"
+				valign=bottom>
+				Untuk Pengusaha Kena Pajak Yang Menerbitkan
+			</td>
+		</tr>
+		<tr>
+			<td style="border-left: 2px solid #000000" colspan=2 height="18" align="left" valign=bottom>
+				Lembar Ke 2
+			</td>
+			<td align="center" valign=bottom>
+				:
+			</td>
+			<td style="border-right: 2px solid #000000" colspan=6 align="left" valign=bottom>
+				Untuk Pembeli
+			</td>
+		</tr>
+		<tr>
+			<td style="border-bottom: 2px solid #000000; border-left: 2px solid #000000" height="19" align="left"
+				valign=bottom>
+				<br>
+			</td>
+			<td style="border-bottom: 2px solid #000000" align="left" valign=bottom>
+				<br>
+			</td>
+			<td style="border-bottom: 2px solid #000000" align="left" valign=bottom>
+				<br>
+			</td>
+			<td style="border-bottom: 2px solid #000000" align="left" valign=bottom>
+				<br>
+			</td>
+			<td style="border-bottom: 2px solid #000000" align="left" valign=bottom>
+				<br>
+			</td>
+			<td style="border-bottom: 2px solid #000000" align="left" valign=bottom>
+				<br>
+			</td>
+			<td style="border-bottom: 2px solid #000000" align="left" valign=bottom>
+				<br>
+			</td>
+			<td style="border-bottom: 2px solid #000000" align="left" valign=bottom>
+				<br>
+			</td>
+			<td style="border-bottom: 2px solid #000000; border-right: 2px solid #000000" align="left" valign=bottom>
+				<br>
+			</td>
+		</tr>
+	</table>
+</body>
+
+</html>
