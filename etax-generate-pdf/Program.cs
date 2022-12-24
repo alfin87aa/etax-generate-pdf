@@ -6,12 +6,11 @@ using WkHtmlToPdfDotNet;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 builder.Services.AddHttpClient();
 
+// Database Connection
 var connectionString = builder.Configuration.GetConnectionString("ETAX");
-
 builder.Services.AddDbContextPool<EtaxContext>(option =>
     option.UseSqlServer(connectionString), 10
 );
@@ -32,7 +31,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

@@ -58,9 +58,9 @@ namespace etax_generate_pdf.Models
                 if(KdJenisTransaksi != null)
                 {
 
-                return $"{KdJenisTransaksi}{FgPengganti}.{NomorFaktur.Substring(0, 3)}-{NomorFaktur.Substring(3, 2)}.{NomorFaktur.Substring(5, 8)}";
+                return $"{KdJenisTransaksi}{FgPengganti}.{NomorFaktur?[..3]}-{NomorFaktur?.Substring(3, 2)}.{NomorFaktur?.Substring(5, 8)}";
                 }
-                return $"{NomorFaktur}";
+                return $"{NomorFaktur?[..3]}.{NomorFaktur?.Substring(3, 3)}-{NomorFaktur?.Substring(6, 2)}.{NomorFaktur?.Substring(8, 8)}";
             }
         }
 
@@ -70,7 +70,7 @@ namespace etax_generate_pdf.Models
         [XmlElement(ElementName = "npwpPenjual")]
         public string? NpwpPenjual { get; set; }
 
-        public string FormatedNpwpPenjual => $"{NpwpPenjual.Substring(0, 2)}.{NpwpPenjual.Substring(2, 3)}.{NpwpPenjual.Substring(5, 3)}.{NpwpPenjual.Substring(8, 1)}-{NpwpPenjual.Substring(9, 3)}.{NpwpPenjual.Substring(12, 3)}";
+        public string FormatedNpwpPenjual => $"{NpwpPenjual?[..2]}.{NpwpPenjual?.Substring(2, 3)}.{NpwpPenjual?.Substring(5, 3)}.{NpwpPenjual?.Substring(8, 1)}-{NpwpPenjual?.Substring(9, 3)}.{NpwpPenjual?.Substring(12, 3)}";
 
         [XmlElement(ElementName = "namaPenjual")]
         public string? NamaPenjual { get; set; }
